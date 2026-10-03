@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'kr.mirror'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'kr.mirror.screen'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    // 고정 서명 키: 이전 버전 위에 덮어 설치 가능
+    signingConfigs {
+        release {
+            storeFile file('mirror.jks')
+            storePassword 'mirror1234'
+            keyAlias 'mirror'
+            keyPassword 'mirror1234'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions { jvmTarget = '17' }
+}
